@@ -5,6 +5,8 @@ Ces derniers s'arrangent entre eux pour former des cristaux, très stables, pour
 
 ### Identification de problèmes par l'analyse des tensions
 
+Une resistance peut altérer (valeur ohmique augmente) ou s'ouvrir. + Sa résistance est grande plus la pellicule de carbone qui la forme est fine et plus elle est fragile.
+
 Quand on a un doute sur un probleme sur un groupe de resistances en parallèle (ou de condos). On compare leur chute de tension avec les autres résitstances en série et on infère quelle serait la resistance équivalente. On la compare ensuite avec le calcul pour vérifier si ça correspond et s’il n’y a pas de fugue ou d’altération.
 
 ### Calcul proportionnel des tensions sur des resistances en série: 
@@ -112,10 +114,17 @@ si la ddp est supérieure a 0,6v et dans le bon sens de polarisation de la diode
 
 Lorsqu'il n'y a pas de ddp entre les deux poles de la diode mais qu'on insère le multimètre, une tension apparait de 0,5v car la diode se polarise légèrement à travers le multimètre
 
+### Défaults sur diodes 
+
 Lorsque l'on mesure 0v sur le multimètre a un endroit non relié à la masse, on a certaines fois un numéro "flottant" qui bouge entre 0,0xx et -0,00xx celà indique que la mesure flotte et n'est pas reliée à la masse
 
 Lorsqu'il y a une resistance en série avec une diode et que l'on a 0v entre les 2, pour savoir si c'est la résistance ou la diode ouverte, on mesure la tension entre les bornes de la résistance. Si la résistance est ouverte on aura un chemin pour le courant et la chute de tension sera de la tension d'origine - 0,6v, car la diode sera polarisée par la tension qui passe à travers le multimètre. 
 
+Lorsqu'une diode a une chute de tension de 0,4v ou moins elle est en fugue.
+Lorsque la ddp est supérieure à 0,7 elle peut être altérée.
+(4 probs: en fugue, en court circuit, ouverte, altérée, fugue en polarisation inverse)
+
+Diode en série avec une resistance et parallèle avec une autre resistance: on calcule la resistance eq. parallèle, et on ajoute un peu de tension (0,3v) pour tenir compte de la resistance.
 
 
 
