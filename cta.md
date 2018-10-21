@@ -31,7 +31,7 @@ Dans une alimentation, les condensateurs electrolytiques ont leurs plaques enrou
 
 
 
-Attention lorsqu’on mesure un diviseur de tension avec un multimetre analogique on a souvent un ecart avec la réalité a cause de la resistance interne du multimètre.
+Attention lorsqu’on mesure un diviseur de tension avec de très hautes résistances (1MegOhm par ex) on a souvent un écart avec la réalité a cause de la resistance interne du multimètre.
 
 
 Polarisation de diode.
