@@ -1,4 +1,26 @@
+###Identification de problèmes par l'analyse des tensions
+
 Quand on a un doute sur un probleme sur un groupe de resistances en parallèle (ou de condos). On compare leur chute de tension avec les autres résitstances en série et on infère quelle serait la resistance équivalente. On la compare ensuite avec le calcul pour vérifier si ça correspond et s’il n’y a pas de fugue ou d’altération.
+
+###Calcul proportionnel des tensions sur des resistances en série: 
+
+regarder combien de fois faut il multiplier "la resistance la plus faible" pour obtenir chacune des autres résistances. 
+Remplacer ensuite la valeur de chacune de ces résistances par ce "multiplicateur". 1x pour la plus faible resistance qui a servi de base pour le calcul, et Nx pour chaque autre resistance.
+On divise ensuite la tension totale par le nombre de x total de toutes les résistances. Ensuite on obtient chaque chute de tension en divisant la tension totale par le nombre de X de chaque resistance.
+
+###Calcul proportionnel des tensions sur des résistances en parallèle
+
+S'il n'y a que deux branches parallèles, on calcule d'abord la resistance totale sur chaque branche en ajoutant les res. en série. Puis, on observe les proportions entre les res eq de chaque branche: combiens de fois doit on multiplier la resistance la plus faible pour obtenir la plus grande?
+Une fois que l'on a ces proportions, on obtient la res eq en divisant la resitance la plus forte par le nombre de propotions total.
+
+Ex: 1 res de 1K une de 5k en parallèle: proportions: 1x et 5x. Nombre total de proportions: 5+1 = 6 ==> res eq = 5k / 6 = 833 ohms
+
+
+s'il y a plus que deux branches parallèles, on prends les 2 premières pour calculer la resistance équivalente, une fois celle-ci calculée, on calcule la résistance equivalente entre la res. eq obtenue et une autre branche. De meme jusqu'à ce qu'il n'y ait plus de branche disponible.
+
+
+###Lampes en série et conseils pratiques de réparation
+
 
 Pour économiser la pointe d’un fer a souder et sa consommation, ajouter un interrupteur sur le fil ainsi qu’une diode en parallèle. Lorque l’interrupteur est ouvert, la diode ne laisse passer qu’un seul cycle du courant alternatif et réduit la consommation d’énergie, lorsqu’on allume de nouveau, le fer se réchauffe très rapidement.
 
