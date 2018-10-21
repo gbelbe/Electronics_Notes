@@ -45,6 +45,30 @@ L'induction electro magnétique apparait lorsque le courant varie dans un induct
 
 Attention, même avec un courant continue, une tension importante apparait lorsque la bobine est mise sous tension, ou lorsqu'elle est coupée. La bobine "réagit" aux changement par une tension qui s'oppose à la variation de la tension.C'est ce principe qui est utilisé pour générer l'étincelle dans la bougie des moteurs à essence: on alimente une grosse bobine, puis on coupe le circuit d'alimentation avec un interrupteur qui transferre à une autre maille ou la bougie est placée. Le faible écart entre les deux bornes de la bougie provoque une étincelle avec la tension générée.
 
+### Générateur
+
+Aimant qui tourne sur un axe autour d'une bobine, ou bobine qui tourne sur un axe a côté d'un aimant.
+Vrais aimants, ou électro aimants (bobine alimentée par une tension continue).
+
+### Tension alternative
+
+Générée par un générateur passe du + au - avec une certaine fréquence. Fréquence (Hz) =  1 / Période (en secondes)
+Une tension alternative a une équivalence de tension moyenne (Root Mean Square) ==> 220v ou 110v par ex.
+Pour obtenir sa tension max:  
+
+Umax = Urms * 1,414
+Urms =  Umax * 0,707
+
+
+### Courant Triphasé
+
+Pour avoir le meilleur rapport entre facilité de transport d'électricité (nombre de fils à utiliser sur les lignes) et maximisation du courant produit lors par les alternateurs (les centrales hydrolique, éolienne, nucléaire, thermique etc. utilisent tous des générateurs):
+Lorsque le rotor fait 1 tour sur lui même, il passe devant trois aimants / bobines, et donc produit trois tensions sinusoidales décalées de 120 degrés. Celà permet de densifier la puissance produite par tous ces courants;
+
+### Transformateur
+
+Deux bobines de fil isolé l'une en face de l'autre ou cote à cote, (ou une seule bobine avec plusieurs sorties intermédiaires (auto transformateur). Couplage avec du matérieux ferreux (magnétique) pour concentrer les flux magnétiques et réduire les pertes.
+
 Lorsque le circuit secondaire du transfo est ouvert (rien n'est branché à ses bornes), quasiment aucun courant n'est consommé. Lorsqu'il est fermé, un courant circule, ce qui crée une variation de champs du secondaire vers le primaire et provoque une consommation de courant.
 
 Un transformateur a des pertes environ 10% et une puissance max de fonctionnement. Pour savoir quel est le courant maxi, on doit connaitre sa puissance et sa tension de secondaire et de primaire. 
