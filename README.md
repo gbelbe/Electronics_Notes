@@ -1,19 +1,19 @@
-###Materiaux conducteurs / isolants / semiconducteurs
+### Materiaux conducteurs / isolants / semiconducteurs
 Atomes sont constitués d'un noyau composé de protons (charges positives) et d'électrons qui tournent autour sur plusieurs ellipses concentriques. La couche la plus éloignée du noyau détermine la "réceptivité" aux électrons. 8 electrons sur cette couche étant le max, les atomes qui en possèdent 3 ou moins sont très réceptifs à en recevoir d'autres (ils sont donc bons conducteurs), ceux qui en possèdent 5 ou plus sont considérés isolants. Ceux qui en possèdent 4 sont semi-conducteurs.
 Ces derniers s'arrangent entre eux pour former des cristaux, très stables, pour en faire des semi conducteurs il faut les "doper" en insérant quelques atomes conducteurs ou isolants pour que le matériel devienne instable et possède les propriétés des semi conducteurs 
 
 
-###Identification de problèmes par l'analyse des tensions
+### Identification de problèmes par l'analyse des tensions
 
 Quand on a un doute sur un probleme sur un groupe de resistances en parallèle (ou de condos). On compare leur chute de tension avec les autres résitstances en série et on infère quelle serait la resistance équivalente. On la compare ensuite avec le calcul pour vérifier si ça correspond et s’il n’y a pas de fugue ou d’altération.
 
-###Calcul proportionnel des tensions sur des resistances en série: 
+### Calcul proportionnel des tensions sur des resistances en série: 
 
 regarder combien de fois faut il multiplier "la resistance la plus faible" pour obtenir chacune des autres résistances. 
 Remplacer ensuite la valeur de chacune de ces résistances par ce "multiplicateur". 1x pour la plus faible resistance qui a servi de base pour le calcul, et Nx pour chaque autre resistance.
 On divise ensuite la tension totale par le nombre de x total de toutes les résistances. Ensuite on obtient chaque chute de tension en divisant la tension totale par le nombre de X de chaque resistance.
 
-###Calcul proportionnel des tensions sur des résistances en parallèle
+### Calcul proportionnel des tensions sur des résistances en parallèle
 
 S'il n'y a que deux branches parallèles, on calcule d'abord la resistance totale sur chaque branche en ajoutant les res. en série. Puis, on observe les proportions entre les res eq de chaque branche: combiens de fois doit on multiplier la resistance la plus faible pour obtenir la plus grande?
 Une fois que l'on a ces proportions, on obtient la res eq en divisant la resitance la plus forte par le nombre de propotions total.
@@ -24,22 +24,22 @@ Ex: 1 res de 1K une de 5k en parallèle: proportions: 1x et 5x. Nombre total de 
 s'il y a plus que deux branches parallèles, on prends les 2 premières pour calculer la resistance équivalente, une fois celle-ci calculée, on calcule la résistance equivalente entre la res. eq obtenue et une autre branche. De meme jusqu'à ce qu'il n'y ait plus de branche disponible.
 
 
-###Lampes en série et conseils pratiques de réparation
+### Lampes en série et conseils pratiques de réparation
 
 
 Pour économiser la pointe d’un fer a souder et sa consommation, ajouter un interrupteur sur le fil ainsi qu’une diode en parallèle. Lorque l’interrupteur est ouvert, la diode ne laisse passer qu’un seul cycle du courant alternatif et réduit la consommation d’énergie, lorsqu’on allume de nouveau, le fer se réchauffe très rapidement.
 
 Lampe série: 3x plus puissante que l’appareil testé. Ex: RL de l’appareil: 25w → ampoule de 75w; Lorsqu’on a besoin de tester un appareil puissant on place plusieurs ampoules en série pour atteindre la puissance désirée.Si l’on a besoin de plus de puissance on peut utiliser une résistance de grille pain ou de douche
 
-###Disjoncteur différentiel:
+### Disjoncteur différentiel:
 Surveille qu’il n’y ait pas de fuite de courant par ex lorsqu’un fil de retour touche une carcasse métallique et que quelqu’un touche cette carcasse, il y a une fuite de courant par le sol. Les deux fils d’entrée et de sortie sont enroulés pour provoquer un champ magnétique du même sens et de même intensité. Si l’un des fils reçoit moins de courant (à cause d’une fuite), le champ magnétique est différent entre les deux fils et celà provoque l’actionnement d’un interrupteur. Reactance inductive / reactance capacitive. 
 
-###Force electro magnétique
+### Force electro magnétique
 
 La force électro magnétique dépend du nombre de spires et du courant qui circule dans le circuit, ainsi que du noyau ferreux qui permet de concentrer le champs de forces
 Cette force apparait en courant continu (elle varie en force et en polarité en courant alternative)
 
-###Induction electro magnétique
+### Induction electro magnétique
 
 L'induction electro magnétique apparait lorsque le courant varie dans un inducteur. Lors de ces variations une tension apparait dans une bobine placée à proximité de son champs électro magnétique.
 
@@ -51,9 +51,7 @@ Un transformateur a des pertes environ 10% et une puissance max de fonctionnemen
 La tension et le courant entre primaire et secondaires sont proportionnelles aux nombre de spires de ces deux bobines. La puissance est la même des deux côtés (hors les pertes).
 
 
-
-
-###reactance inductive et capacitive.
+### reactance inductive et capacitive.
 
 l'impedance d'un transformateur fait qu'il limite plus le courant que sa simple résistance laisserait penser.
 Zl = R (res ohmique du transfo) + Xl (reactance inductive à 50Hz/60Hz courant alternatif 220V classique)
@@ -83,7 +81,7 @@ Dans une alimentation, les condensateurs electrolytiques ont leurs plaques enrou
 Attention lorsqu’on mesure un diviseur de tension avec de très hautes résistances (1MegOhm par ex) on a souvent un écart avec la réalité a cause de la resistance interne du multimètre.
 
 
-###Polarisation de diode.
+### Polarisation de diode.
 
 On regarde la tension dans les mailles sans la diode
 si la ddp est supérieure a 0,6v et dans le bon sens de polarisation de la diode, on ajoute la diode et on recalcule les tensions, la diode force une tension de 0,6v.
