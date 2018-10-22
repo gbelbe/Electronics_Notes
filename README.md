@@ -126,5 +126,17 @@ Lorsque la ddp est supérieure à 0,7 elle peut être altérée.
 
 Diode en série avec une resistance et parallèle avec une autre resistance: on calcule la resistance eq. parallèle, et on ajoute un peu de tension (0,3v) pour tenir compte de la resistance.
 
+Note: si une diode est en série avec une résistance et qu'il y a un défaut, si la ddp autour de la diode est de 0,6v, celà n'exclue pas que la résistance soit altérée
+
+Si une diode est en série avec une resistance. Si un courant même très léger circule par la diode (ex: ddp de 0,5 sur la diode), on doit observer également une ddp légère sur la résistance.
+
+Lorsqu'on a une maille série parallèle avec une diode zener ou plusieurs diodes sur l'une des branches, pour calculer la tension en dessus de la maille, on déplace toutes  les diodes vers la masse, puis on calcule la moyenne pondérée des tensions sur les résistances de chaque branche. Ca nous donne la tension moyenne que l'on peut utiliser comme base à la maille parallèle au dessus des diodes.
+
+Moyenne pondérée des tensions.
+On calcule la proportion des Req de chaque branche (1x / 3x par ex), puis on multiplie chaque proportion avec la tension de la branche opposée et on ajoute le tout, puis on divise par la somme des proportions.
+On continue ensuite les calculs en se basant sur la tension moyenne obtenue comme base commune des resistances en parallèles au lieu de 0v.
+Cette technique marche aussi pour des tensions négatives (ce qui compte c'est la DDP, une tension négative s'ajoute a une positive pour former une ddp totale plus importante).
+
+Attention a bien vérifier le sens de circulation du courant qui n'est pas toujours bien explicite sur les schémas. Peu importe le schéma, le courant va toujours de la tension la plus haute à la plus basse.
 
 
