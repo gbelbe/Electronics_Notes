@@ -139,4 +139,9 @@ Cette technique marche aussi pour des tensions négatives (ce qui compte c'est l
 
 Attention a bien vérifier le sens de circulation du courant qui n'est pas toujours bien explicite sur les schémas. Peu importe le schéma, le courant va toujours de la tension la plus haute à la plus basse.
 
+### Diodes en circuit alternatif
+
+Une diode située au secondaire d'un transfo élimine chaque demi cycle négatif, ne laissant passer que le cycle positif moins 0,6v de chute de tensions sur la diode.
+20v alternatif, 19,4 vmax après la diode. On calcule la tension RMS sur ce demi cycle (70,7% de Vmax) = 13,7 v, puis on divise ce résultat par 2 car l'autre demi cycle est bloqué par la diode (0v), c'est pour celà qu'on obtient 6,8 V avec le multimètre en position courant continu.
+
 
