@@ -139,9 +139,29 @@ Cette technique marche aussi pour des tensions négatives (ce qui compte c'est l
 
 Attention a bien vérifier le sens de circulation du courant qui n'est pas toujours bien explicite sur les schémas. Peu importe le schéma, le courant va toujours de la tension la plus haute à la plus basse.
 
-### Diodes en circuit alternatif
+### Diodes en circuit alternatif après transfo
 
 Une diode située au secondaire d'un transfo élimine chaque demi cycle négatif, ne laissant passer que le cycle positif moins 0,6v de chute de tensions sur la diode.
 20v alternatif, 19,4 vmax après la diode. On calcule la tension RMS sur ce demi cycle (70,7% de Vmax) = 13,7 v, puis on divise ce résultat par 2 car l'autre demi cycle est bloqué par la diode (0v), c'est pour celà qu'on obtient 6,8 V avec le multimètre en position courant continu.
+
+Quand on mesure un circuit avec 1 diode et 2 resistances en série attachée au secondair d'un transfo et la ref terre entre les deux, lors du cycle positif, on a 20v aux bornes du secondaire et +10v et -10v entre chaque resistance (ref 0v entre les deux), et 0v et -20 v lors du semi cycle négatif ou la diode bloque le passage du courant. (c'est alors un circuit ouvert ou le courant ne passe pas, on a donc d'un coté une ref à -20v et 0v derrière la diode qui est comme un bouton ouvert).
+
+Lorsqu'on mesure la tension AC au secondaire du transfo, le multimètre mesure la tension efficace et non de pic. (donc 70% de la tension de pic).
+Lorsqu'on mesure la tension DC rectifiée après diode et avec un condensateur en parallèle, cette tension DC sera plus grande, car le condo se charge jusqu'à la tension de pic AC. (et non efficace)
+
+Pour savoir le ripple d'une tension d'alim:
+t = C.R (tau =  constante de decharge de 63% du condo, 3t = 95%, 5t = 99%)
+freq 50hz => periode (50 cycles par seconde) combien de fois 50 dans 1000ms? => dans 100ms = 2x dans 1000 => 20x, periode = 20ms.
+Temps que le condo doit supporter la charge tout seul (sans l'aide de la tension du transfo)==> temps entre le moment ou il est chargé au max (Vmax, milieu du semi cycle positif), et quelque part lors du début du semi cycle positif (moment ou la tension fournie par le transfo est égale à la tension aux bornes du condo.
+20ms.
+t = RC    pour RL = 1500 ohms et C = 4,7uF = 0,0000047 F
+t = 1500 * 0,0000047 = 0,007 ==> 7ms jusqu'à ce qu'il ne reste plus que 30% de la charge du condo.
+
+
+### Circuit doubleur de tension
+
+Lorsqu'on a 20 v au secondaire d'un transfo, rectifié en demi onde avec une diode, et intégré avec un condo, lorsque le demi cycle s'inverse, la diode bloque et l'on obtient 40 v momentanément à l'un des poles du secondaire du transfo (près de la diode qui bloque lorsque la tension s'inverse). (20v en sens contraire sur le transfo + 20 v qui provient du condo chargé).
+Si on ajoute une diode suivie d'un condensateur, on laisse passer cette tension de 40v pour charger le condo et obtenir une tension continue de 40v.
+
 
 
