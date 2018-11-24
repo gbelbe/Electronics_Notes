@@ -157,11 +157,75 @@ Temps que le condo doit supporter la charge tout seul (sans l'aide de la tension
 t = RC    pour RL = 1500 ohms et C = 4,7uF = 0,0000047 F
 t = 1500 * 0,0000047 = 0,007 ==> 7ms jusqu'à ce qu'il ne reste plus que 30% de la charge du condo.
 
+Lorsqu'on mesure un courant alternatif rectifié par une diode, à la borne du transfo qui est près de la diode, on observe une tension négative élevée lors du semi cycle bloqué par la diode. (le courant étant bloqué par la diode, il ne circule pas, il n'y a donc pas de chute de tension aux bornes des resistances mais simplement un pic de tension généré par la "pile" (les bornes du secondaire du transfo). 
+
+Pour bien repérer le sens de circulation du courant à partir du secondaire d'un transfo, on le remplace par une pile ou une source DC de polarité définie. (on inverse la polarité pour imaginer ce qui se produit lors de l'autre phase).
+
+
 
 ### Circuit doubleur de tension
 
 Lorsqu'on a 20 v au secondaire d'un transfo, rectifié en demi onde avec une diode, et intégré avec un condo, lorsque le demi cycle s'inverse, la diode bloque et l'on obtient 40 v momentanément à l'un des poles du secondaire du transfo (près de la diode qui bloque lorsque la tension s'inverse). (20v en sens contraire sur le transfo + 20 v qui provient du condo chargé).
 Si on ajoute une diode suivie d'un condensateur, on laisse passer cette tension de 40v pour charger le condo et obtenir une tension continue de 40v.
+
+
+### Vp Vpp Vdc-eq
+
+Vp = tension de pic d'une onde. S'il s'agit d'un ripple qui a une faible variation mais arrive a un niveau de tension élevé, Vp correspont à la tension de pic la plus élevée au dessus de 0.
+Vp, on prend la tension max a partir de la référence utilisée pour faire la mesure (Ref souvent 0). Vp est positive ou négative.
+
+
+Vpp =  s'il s'agit d'un ripple, il y a une faible variation, Vpp correspond à la différence entre le point de plus faible tension et de plus haute tension de l'onde. Vpp peut être plus faible que Vp, par exemple pour une onde de ripple. La tension Vpp n'a pas de polarité.
+
+Pour le calcul d'une tension DC moyenne equivalente, il faut observer la surface moyenne de l'onde et imaginer le niveau qui repartirait cette surface en deux parties de surfaces égales (en haut et en bas du trait)
+
+
+### Diodes Zener
+
+Une diode zener est ustilisée en polarisation inverse. Sa tension nominale peut varier légèrement (elle est inférieure si elle reçoit peu de courant / resistance élevée en série) ou tension inférieure si bcp de courant (faible resistance en série)
+Vz (tension zener =  tension inverse)
+Pmax (puissance max)
+
+Note: circuits parallèles indépendants:
+Si 2 circuits parallèles sont liés à l'alimentation, ils sont indépendants, car la source fournie une tension égale peu importe les circuits.
+Si par contre il y  a une resistance en série avec ces deux branches parallèles, (ex resistance interne de la batterie), la consommation d'une des branches influe sur l'autre.
+
+Lorsqu'on a une zener dans un circuit parlallèle, elle même en série avec une resistance, on place la zener en bas et on la retire du circuit pour calculer une moyenne pondérée.
+
+Moyenne pondérée des tensions sert à trouver la tension moyenne à laquelle on va ajouter la tension équivalente.
+
+Dans un circuit série avec des diodes zener ou non qui ne sont pas polarisées car leur tension dépasse la tension de la source, lorsque l'on introduit un multimètre entre les diodes, l'une d'elle peut être polarisée par le faible courant qui passe par la résistance élevée du multimètre (>1 Mohm) et formant un circuit parallèle directement connecté à la masse.
+Attention, si une diode est inversement polarisée sur un circuit série, le fait de placer le multimètre pour mesurer une tension avant cette diode laissera passer un courant faible à travers le multimètre et montrera une chute de tension.
+
+### LED
+
+Une led a une tension de polarisation généralement entre 1,5 et 3v certaines fois plus, en fonction de la couleur.
+Pour polariser plusieurs diodes on peut les placer en série avec une résistance qui limite le courant en série.
+Si l'on veut polariser plus de résistances on ne doit pas les placer en parallèles avec une résistance unique pour limiter le courant car si l'une des led s'ouvre, le courant sera supérieur sur toutes les autres branches parallèles. On préfèrera créer des circuits séries séparés, chacuns avec sa résistance.
+
+### Transistor
+
+Le transistor NPN ou PNP est composé de trois poles, Emissor (polarité avec la flèche) Collector et Base. 
+Gain du transistor (ou Beta ou Hfe) correspond à Iec / Ibe. Il correspond au facteur de gain en courant entre le courant de base et Collecteur Emissor.
+Si l'on veut utiliser un transistor comme un interrupteur (on doit "saturer" le transistor), il faut s'assurer que l'on envoie 30% de plus de courant que le courant de base nécessaire avec le Béta du transistor. De cette manière on est certain que le transistor sera complètement saturé et aura une résistance EC proche de zéro. Il faudra également s'assurer d'ajouter une résistance de protection à la base de celui-ci pour limiter le courant qui passera par celle-ci et éviter que le transistor ne crame.
+
+Attention, lorsqu'on mesure un transistor avec un multimètre et que la base est ouverte, la tension mesurée ne sera pas nécessairement nulle car le multimètre a une résistance propre d'1 Mohm, qui sera donc placée en série avec la base et pourra générer une faible polarisation de la base du transistor. (la tension obtenue sera donc celle d'un circuit avec un diviseur formé par une eventuelle autre résistance, la jonction du transistor et la résistance du multimètre)
+
+Un transistor possède également une tension Emissor Collector maximum, par sécurité on s'assurera qu'elle est au moins 30% supérieure à la tension nécessaire pour notre circuit. 
+
+Si le transistor doit alimenter un relai, il faudra mettre une diode en parallèle avec le relai car la tension inverse générée par la bobine sera haute lorque le transistor sera dépolarisé. Lorsque le transistor sera coupé, la tension aux bornes de la bobine aura un chemin pour circuler par la diode et circulera en boucle par la bobine jusqu'à ce qu'elle soit dispersée par effet joule.
+
+Pour dimensionner le courant nécessaire pour le transistor:
+- relai 12v 1A, il faudra qu'il y ait 1 A qui passe par le transistor.
+- transistor Beta = 20, courant de base = 1/20 => 0,05 A, pour s'assurer d'une bonne polarisation on prendra 30% de plus de courant de base, donc 0,065A
+- On choisira donc une résistance qui limitera le courant à 0,065 A.
+
+Attention : Lorsque le transistor est dépolarisé, on ne doit pas laisser la base "flottante" car les émissions électromagnétique (courant 60hz, ou moteur) peuvent générer un bruit qui va polariser le transistor aléatoirement. On ajoute donc une résistance qui reliera la base à la terre lorsque le transistor sera dépolarisé.
+
+
+### Circuit avec LDR / relai et transistor
+
+Lorsque l'on veut retarder la polarisation du transistor par le diviseur de tension et la LDR, on peut ajouter un Transistor en parallèle avec la LDR et la masse. Il prendra un certain temps à se charger et retardera la polarisiation, ce qui evitera que le relai ne clignote lorsque le diviseur est proche de la tension de polarisation du transistor. (on prend t = RC (temps pour 66% de tension, 2t pour 90%) pour calculer la capacitance nécessaire en fonctio du temps de délai nécessaire)
 
 
 
