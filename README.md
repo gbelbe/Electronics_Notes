@@ -197,6 +197,8 @@ Moyenne pondérée des tensions sert à trouver la tension moyenne à laquelle o
 Dans un circuit série avec des diodes zener ou non qui ne sont pas polarisées car leur tension dépasse la tension de la source, lorsque l'on introduit un multimètre entre les diodes, l'une d'elle peut être polarisée par le faible courant qui passe par la résistance élevée du multimètre (>1 Mohm) et formant un circuit parallèle directement connecté à la masse.
 Attention, si une diode est inversement polarisée sur un circuit série, le fait de placer le multimètre pour mesurer une tension avant cette diode laissera passer un courant faible à travers le multimètre et montrera une chute de tension.
 
+Si l'on ne sait pas la tension type d'une zener, on peut facilement la retrouver en la mettant en série avec une resistance de 10K sur une tension de 12v ou plus. On mesure au multimètre la tension à ses bornes.
+
 ### LED
 
 Une led a une tension de polarisation généralement entre 1,5 et 3v certaines fois plus, en fonction de la couleur.
@@ -211,7 +213,7 @@ Si l'on veut utiliser un transistor comme un interrupteur (on doit "saturer" le 
 
 Attention, lorsqu'on mesure un transistor avec un multimètre et que la base est ouverte, la tension mesurée ne sera pas nécessairement nulle car le multimètre a une résistance propre d'1 Mohm, qui sera donc placée en série avec la base et pourra générer une faible polarisation de la base du transistor. (la tension obtenue sera donc celle d'un circuit avec un diviseur formé par une eventuelle autre résistance, la jonction du transistor et la résistance du multimètre)
 
-Un transistor possède également une tension Emissor Collector maximum, par sécurité on s'assurera qu'elle est au moins 30% supérieure à la tension nécessaire pour notre circuit. 
+Un transistor possède également une tension Emissor Collector maximum, par sécurité on s'assurera qu'elle est au moins 30% supérieure à la tension nécessaire pour notre circuit. (on prend toujours une marge de 30% sur les maximums indiqués dans les specs)
 
 Si le transistor doit alimenter un relai, il faudra mettre une diode en parallèle avec le relai car la tension inverse générée par la bobine sera haute lorque le transistor sera dépolarisé. Lorsque le transistor sera coupé, la tension aux bornes de la bobine aura un chemin pour circuler par la diode et circulera en boucle par la bobine jusqu'à ce qu'elle soit dispersée par effet joule.
 
@@ -220,12 +222,24 @@ Pour dimensionner le courant nécessaire pour le transistor:
 - transistor Beta = 20, courant de base = 1/20 => 0,05 A, pour s'assurer d'une bonne polarisation on prendra 30% de plus de courant de base, donc 0,065A
 - On choisira donc une résistance qui limitera le courant à 0,065 A.
 
-Attention : Lorsque le transistor est dépolarisé, on ne doit pas laisser la base "flottante" car les émissions électromagnétique (courant 60hz, ou moteur) peuvent générer un bruit qui va polariser le transistor aléatoirement. On ajoute donc une résistance qui reliera la base à la terre lorsque le transistor sera dépolarisé.
+### Protection contre les interferences électromagnétiques.
+
+Attention : Lorsque le transistor est dépolarisé, on ne doit pas laisser la base "flottante" car les émissions électromagnétique (courant 60hz, ou moteur) peuvent générer un bruit qui va polariser le transistor aléatoirement. On ajoute donc une résistance qui reliera la base à la terre lorsque le transistor sera dépolarisé. Plus la valeur de la resistance est basse moins il sera sensible aux "bruits". Mais certaines fois il ne sera pas possible de mettre moins de 10k (car celà provoquera un diviseur de tension trop élevé)
+
+Un autre moyen de lutter contre les interférences de haute fréquence est de placer un condensateur entre la base et le collecteur: celui-ci se charge avec la tension de collecteur. Lorsque la base capte une interférence, la base se polarise et fait baisser la tension de collecteur. Comme le condo était chargé, il transferre cette baisse de à la base (l'autre côté du condo). En chutant la tension dépolarise le transitor immédiatement. (et donc le protège contre les polarisations intempestives dues aux EFI). 
+
+
+### Types de problèmes sur un transistor
+
+Court circuit entre base et collecteur ou entre collecteur et emisseur
+Manque de gain (le transistor a un gain plus faible que prévu, malgré une bonne polarisation)
+Une fugue émisseur collecteur provoque une chute de tension indésirable aux bornes du transistor, même lorsqu'il est dépolarisé.
+Une fugue emisseur base empêchera la transistor de se polariser, même lorsqu'il existe suffisament de courant à sa base.
+ 
 
 
 ### Circuit avec LDR / relai et transistor
 
 Lorsque l'on veut retarder la polarisation du transistor par le diviseur de tension et la LDR, on peut ajouter un Transistor en parallèle avec la LDR et la masse. Il prendra un certain temps à se charger et retardera la polarisiation, ce qui evitera que le relai ne clignote lorsque le diviseur est proche de la tension de polarisation du transistor. (on prend t = RC (temps pour 66% de tension, 2t pour 90%) pour calculer la capacitance nécessaire en fonctio du temps de délai nécessaire)
-
 
 
