@@ -1,3 +1,4 @@
+
 ### Materiaux conducteurs / isolants / semiconducteurs
 Atomes sont constitués d'un noyau composé de protons (charges positives) et d'électrons qui tournent autour sur plusieurs ellipses concentriques. La couche la plus éloignée du noyau détermine la "réceptivité" aux électrons. 8 electrons sur cette couche étant le max, les atomes qui en possèdent 3 ou moins sont très réceptifs à en recevoir d'autres (ils sont donc bons conducteurs), ceux qui en possèdent 5 ou plus sont considérés isolants. Ceux qui en possèdent 4 sont semi-conducteurs.
 Ces derniers s'arrangent entre eux pour former des cristaux, très stables, pour en faire des semi conducteurs il faut les "doper" en insérant quelques atomes conducteurs ou isolants pour que le matériel devienne instable et possède les propriétés des semi conducteurs 
@@ -229,17 +230,36 @@ Attention : Lorsque le transistor est dépolarisé, on ne doit pas laisser la ba
 Un autre moyen de lutter contre les interférences de haute fréquence est de placer un condensateur entre la base et le collecteur: celui-ci se charge avec la tension de collecteur. Lorsque la base capte une interférence, la base se polarise et fait baisser la tension de collecteur. Comme le condo était chargé, il transferre cette baisse de à la base (l'autre côté du condo). En chutant la tension dépolarise le transitor immédiatement. (et donc le protège contre les polarisations intempestives dues aux EFI). 
 
 
+
+
 ### Types de problèmes sur un transistor
 
 Court circuit entre base et collecteur ou entre collecteur et emisseur
-Manque de gain (le transistor a un gain plus faible que prévu, malgré une bonne polarisation)
-Une fugue émisseur collecteur provoque une chute de tension indésirable aux bornes du transistor, même lorsqu'il est dépolarisé.
-Une fugue emisseur base empêchera la transistor de se polariser, même lorsqu'il existe suffisament de courant à sa base.
- 
 
+Manque de gain (le transistor a un gain plus faible que prévu, malgré une bonne polarisation)
+Lorsqu'on est certain que le transistor reçoit une bonne polarisation (0,6v ou plus) mais que celui-ci ne sature pas complètement, (il y à une ddp de plusieurs volts à ses bornes) il a sans aucun doute un problème de défaut de gain.
+
+Une fugue émisseur collecteur provoque une chute de tension indésirable aux bornes du transistor, même lorsqu'il est dépolarisé.
+
+Une fugue base-emissor diminue la conduction collecteur-emisseur, et empêchera la transistor de se polariser correctement, même lorsqu'il existe suffisament de courant à sa base. (la chute de tension entre collecteur et emisseur diminue, ou sa resistnace equivalente augmente par rapport à la normale.)
+
+Attention aux mesures près des semiconducteurs: Le multimètre est une resistance d'1 MegaOhm ou plus en série. Il a donc des effets sur le résultat de la mesure.
+
+Ex: un transistor coupé (non polarisé par le circuit) devrait avori 0v sur sa base mais aura probablement O,5v lors de la mesure car le multimètre est en série avec celui-ci.
+
+Lorsqu'un transistor travaille dans un circuit a haute frequence, saturant et ouvrant tres rapidement, la tension sur sa base sera de 0,3v (tension moyenne entre 0,6 et 0v).
+
+Lorsque le transistor joue le role d'actionneur, il est normalement saturé (tension de 0V entre collecteur et emisseur). S'il ne l'est pas complètement de quelques milivolts à quelques volts entre E et C, celà n'est pas forcément un défaut, si celà n'empeche pas le circuit d'actionner correctement. C'est peut-être simplement un petit manque de courant en base ou une petite fugue.
 
 ### Circuit avec LDR / relai et transistor
 
 Lorsque l'on veut retarder la polarisation du transistor par le diviseur de tension et la LDR, on peut ajouter un Transistor en parallèle avec la LDR et la masse. Il prendra un certain temps à se charger et retardera la polarisiation, ce qui evitera que le relai ne clignote lorsque le diviseur est proche de la tension de polarisation du transistor. (on prend t = RC (temps pour 66% de tension, 2t pour 90%) pour calculer la capacitance nécessaire en fonctio du temps de délai nécessaire)
 
+
+### options différentes entre Base Emissor en fugue ou resistance de base ouverte:
+La fugue base emissor entrainera une consommation de puissance élevée à travers la resistance de base, généralement de faible valeur, qui entrainera un dégagement de chaleur important sur le circuit. Si la résistance est ouverte, pas de courant, donc pas de dégagement de chaleur.
+
+### transistor comme amplificateut de signal
+
+On choisit sa valeur de resistance équivalente = 1,5 fois celle de la résistance de collector. On peut mettre une résistance d'émisseur de faible valeur.
 
