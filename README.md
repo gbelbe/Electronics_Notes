@@ -68,6 +68,9 @@ Urms =  Umax * 0,707
 Pour avoir le meilleur rapport entre facilité de transport d'électricité (nombre de fils à utiliser sur les lignes) et maximisation du courant produit lors par les alternateurs (les centrales hydrolique, éolienne, nucléaire, thermique etc. utilisent tous des générateurs):
 Lorsque le rotor fait 1 tour sur lui même, il passe devant trois aimants / bobines, et donc produit trois tensions sinusoidales décalées de 120 degrés. Celà permet de densifier la puissance produite par tous ces courants;
 
+note: tension entre deux des trois cables du triphasé: 380vAC, tension entre un seul des cables et la terre: 220vAC
+le transfo local passe du 13800v au 220v entre 2 fils du trifasé en introduisant un neutre au milieu. La taille du cable de sortie du transfo, est importante et généralement après ce transfo on tire plusieurs cables parallèles à chaque habitation pour éviter un gros cable sur une distance trop importante.
+
 ### Transformateur
 
 Deux bobines de fil isolé l'une en face de l'autre ou cote à cote, (ou une seule bobine avec plusieurs sorties intermédiaires (auto transformateur). Couplage avec du matérieux ferreux (magnétique) pour concentrer les flux magnétiques et réduire les pertes.
@@ -262,4 +265,17 @@ La fugue base emissor entrainera une consommation de puissance élevée à trave
 ### transistor comme amplificateut de signal
 
 On choisit sa valeur de resistance équivalente = 1,5 fois celle de la résistance de collector. On peut mettre une résistance d'émisseur de faible valeur.
+
+
+### Alimentation stabilisée:
+
+Une alimentation statbilisée est un diviseur de tension entre la charge et un transistor qui maintient toujours la même proportion entre les deux, peu importe la consommation de la charge. (+ la charge consomme, plus sa résistance interne diminue, et donc plus le transistor doit être polarisé pour maintenir la proportion du diviseur).
+
+Une diode zener permet de maintenir la tension fixe, on calcule la résistance nécéssaire pour polariser la base du transistor avec juste suffisament de courant en sortie (après x par le Béta) pour qu'il y ait 1A qui passe par le transistor.
+Si la diode zener fixe la base du NPN a 5,6v, la tension aux bornes de la charge sera fixée à 5v. Donc le courant qui passe par le transistor (1A) passera aussi par la charge.), il suffit de trouver le courant nécéssaire sur la base pour que le transistor renvoie 1A. Ce courant et la tension restante (tension totale - zener) determinera la résistance de polarisation de la base.
+Attention à réduire un peu cette resistance pour permettre au courant de base de passer également par la diode zener et de maintenir sa polarisation. (si tout le courant venait a passer par le transistor, la diode zener n'en recevrait pas suffisament pour se polariser et ne pourrait jouer son role)
+
+Attention, on doit vérifier que si l'on éteint la charge, la diode zener supportera le courant qui passera alors entièrement par elle. (on verifie sa puissance (p=UxI).
+
+
 
