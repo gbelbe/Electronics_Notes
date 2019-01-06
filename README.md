@@ -254,6 +254,12 @@ Lorsqu'un transistor travaille dans un circuit a haute frequence, saturant et ou
 
 Lorsque le transistor joue le role d'actionneur, il est normalement saturé (tension de 0V entre collecteur et emisseur). S'il ne l'est pas complètement de quelques milivolts à quelques volts entre E et C, celà n'est pas forcément un défaut, si celà n'empeche pas le circuit d'actionner correctement. C'est peut-être simplement un petit manque de courant en base ou une petite fugue.
 
+
+Lorsqu'un transistor est polarisé par un autre, pour trouver le défaut, il faut bien observer en remontant la pente, si le transistor est bien polarisé par une tension suffisante, et observer les chutes de tensions dans les résistances en amont pour voir d'ou vient le courant. Si la chute de tension dans les résistances proches vont dans le sens opposés au normal, c'est probablement qu'il y a une fugue base emisseur ou base collecteur qui dévie le courant et le fait aller dans le "mauvais sens".
+
+
+
+
 ### Circuit avec LDR / relai et transistor
 
 Lorsque l'on veut retarder la polarisation du transistor par le diviseur de tension et la LDR, on peut ajouter un Transistor en parallèle avec la LDR et la masse. Il prendra un certain temps à se charger et retardera la polarisiation, ce qui evitera que le relai ne clignote lorsque le diviseur est proche de la tension de polarisation du transistor. (on prend t = RC (temps pour 66% de tension, 2t pour 90%) pour calculer la capacitance nécessaire en fonctio du temps de délai nécessaire)
@@ -276,6 +282,13 @@ Si la diode zener fixe la base du NPN a 5,6v, la tension aux bornes de la charge
 Attention à réduire un peu cette resistance pour permettre au courant de base de passer également par la diode zener et de maintenir sa polarisation. (si tout le courant venait a passer par le transistor, la diode zener n'en recevrait pas suffisament pour se polariser et ne pourrait jouer son role)
 
 Attention, on doit vérifier que si l'on éteint la charge, la diode zener supportera le courant qui passera alors entièrement par elle. (on verifie sa puissance (p=UxI).
+
+! 7809 entree doit être supérieur à la sortie d'au moins 30% pour que la reduction de tension soit correcte.
+
+
+Si l'on a un courant trop important sur la diode zener, on peut ajouter un autre transistor directement connecté à la base du premier, pouar ajouter un étage d'amplification et réduire le courant max de la zener qui sera maintenant connectée à la base du second transistor.
+
+Note: on effectue les calculs de resistances de polarisation en prenant le cas du courant maximum. A partir de ce courant on calcule la resistance de collecteur pour qu'elle soit légèrement inférieure à la resistance interne du transistor. La somme des deux devra être calculée pour le courant maxi. Donc on prendra 2/3 de la tension sur la resistance de collecteur par ex. L'idée est que comme on est sur le courant max, lorsque le courant diminura (moins de consommation de la charge) le transistor augmentera sa résistance interne. (on doit toujours choisir uen valeur de la résistance de collecteur de telle sorte à ce que le transistor reste en polarisation moyenne et ne soit jamais saturé ou coupé (sauf si l'on a retiré la charge du circuit).
 
 
 
