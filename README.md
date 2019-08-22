@@ -290,5 +290,49 @@ Si l'on a un courant trop important sur la diode zener, on peut ajouter un autre
 
 Note: on effectue les calculs de resistances de polarisation en prenant le cas du courant maximum. A partir de ce courant on calcule la resistance de collecteur pour qu'elle soit légèrement inférieure à la resistance interne du transistor. La somme des deux devra être calculée pour le courant maxi. Donc on prendra 2/3 de la tension sur la resistance de collecteur par ex. L'idée est que comme on est sur le courant max, lorsque le courant diminura (moins de consommation de la charge) le transistor augmentera sa résistance interne. (on doit toujours choisir uen valeur de la résistance de collecteur de telle sorte à ce que le transistor reste en polarisation moyenne et ne soit jamais saturé ou coupé (sauf si l'on a retiré la charge du circuit).
 
+### Choix des resistances alim stabilisée:
+
+Attention à penser à trouver une résistance pas trop élevée pour laisser toujours un peu de courant polariser la diode zener et la jonction du transistor. Si la résistance ne permet pas suffisament de passage de courant pour polariser la zener, le circuit ne fonctionnera pas.
+
+Penser aussi au cas ou rien n'est branché au circuit et donc tout le courant passe par la zener: important de voir quelle puissance elle absorbe pour choisir le bon composant 0,5w ou 1 w.
+
+Attention aux montage réalisés en tension négative (-Vcc) les composants sont montés à l'envers
+
+Attention à la mesure de tension: a partir de quelle reference mesure t'on la tension. La masse définie la référence. tout point avec un potentiel en dessous de la masse est négatif.
+
+Attention, pour un transistor on prend dans les specs toujours la Hfe mini pour faire les calculs. Souvent les specs donnent une hfe mini et maxi comme elle varie selon les pièces, on veut garantir un courant minimum dans la base pour être certain que le transistor sera saturé, donc pour calculer la valeur de la resistance de base on prend en compte le gain mini du transistor
+
+Régulateur 7805: attention, le circuit ne régulera la tension que pour une tension au minimum 30% supérieur à la tension de sortie spécifiée. Idem pour un circuit avec des composants discrets.
+
+Pour calculer le dissipateur que l'on doit accrocher: regarder l'écart de tension à stabiliser (20 entrée 9 ens ortie => 11v de chute sur le régul), on multiplie par le courant qui passera dans le circuit et l'on a la puissance qui passe à travers le composant et la nécessité de dissipateur
+
+Pour calculer le transistor nécessaire pour une alimentation stabilisée: on regarde ce que la "charge" nécéssite comme courant. On part toujours de la fin du circuit car le courant est "tiré" par la charge, et le reste du circuit doit lui fournir ce courant.
+Ex: la charge a besoin de 5 A: le transistor devra laisser passer 5A, donc sa base devra être alimentée par 5/ Hfe min (gain mini du transistor) => une fois que l'on a le courant mini on peut en déduire la résistance de base en la prenant toujours légèrement supérieure pour polariser le zener.
+
+Attention on doit choisir un transistor qui accepte au moins 30% de plus de courant que celui qui est nécessaire pour le circuit.
+
+On commence toujours par travailler avec l'hypothèse de consommation maxi de la "charge". On traite après le cas ou la consommation est nulle.
+
+Montage avec deux ou plusieurs transistors permet de diminuer la taille des composants.
+calcul de la polarisation du transistor qui va polariser le transistor de puissance. On part du cas de consommation maxi pour déterminer le courant de base nécessaire.
+Comme on est dans le cas de consommation maxi, on calcule une resistance faible du transistor de polarisation (mais mieux vaut ne pas le saturer car celà permettra d'être plus tolerant s'il y a consommation légèrement supérieure). On peut prendre l'hypothèse qu'en courant maxi la resistance de collector sera 2/3 superieur ou égale à la resistance du transistor de polarisation. On regarde ensuite la chute tension qui passe par le transistor et sa resistance de collecteur, et on divise par le courant nécessaire à la base du tr de puissance. ==> on en déduit la ddp sur la resistance et donc sa valeur.
+
+
+# notes transistors
+
+
+Attention on dit que le collecteur est ouvert quand il y a polarisation de la base emissor mais pas de circulation de courant entre collecteur et emisseur
+
+Manque de gain: polarisation entre base et emisseur de 0,7 et 0,8 mais pas de saturartion
+
+si la jonction base emissor se coupe dans un transistor npn, la tension de base va augmenter fortement (elle ne sera plus contrainte par la tension de diode)
+
+Attention quand faible polarisation d'un transistor, regarder les flux de tension avant le collecteur et après l'emisseur, si l'un d'eux est nul (pas de chute de tension dans l'une de ces résistances celà indique qu'il n'est pas polarisé.
+
+Cas d'un transistor qui n'est pas polarisé mais ou les tensions de collecteur et d'emisseur sont différentes: il y a peut etre une fugue C-E. Mais regarder s'il y a chute de tension dans les résistances avant ou après le transistor. Si ce n'est pas le cas il n'y a pas de courant qui passe par le transistor. Dans ce cas un transistor qui parait polarisé par le premier est peut-être tout simplement en fugue collecteur base, une fugue qui fait polariser de lui même la base du transistor, sans courant qui circule dans la maille de la base.
+
+Attention si la tension de sortie est faible, et que même en remontant les transistor elle n'atteint pas la tension de seuil du zener, celui ci ne sera pas activé et il ne maintiendra pas la tension à sa tension de seuil.
+Lors d'un circuit d'alim stabilisé, veiller a regarder s'il n'y a pas un défaut de polarisation des transistors qui draine du courant et empêche la zener d'atteindre sa tension de seuil. Si tout parait normal c'est la zener qui est en fugue. 
+
 
 
