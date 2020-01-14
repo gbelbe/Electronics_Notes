@@ -257,7 +257,9 @@ Lorsque le transistor joue le role d'actionneur, il est normalement saturé (ten
 
 Lorsqu'un transistor est polarisé par un autre, pour trouver le défaut, il faut bien observer en remontant la pente, si le transistor est bien polarisé par une tension suffisante, et observer les chutes de tensions dans les résistances en amont pour voir d'ou vient le courant. Si la chute de tension dans les résistances proches vont dans le sens opposés au normal, c'est probablement qu'il y a une fugue base emisseur ou base collecteur qui dévie le courant et le fait aller dans le "mauvais sens".
 
-
+Attention: une fugue collecteur base va auto-polariser le transistor et donc faire passer une tension de 0,6 entre base et emisseur.
+Il faut toujours regarder quelle est la polarisation du transistor et imaginer ce que celà devrait donner comme resistance / saturation du transistor. (0,7v à la jonction BE devrait normalement sature le transistor).
+Pour savoir si c'est une fugue collecteur emisseur ou collecteur base, on regarde s'il y a du courant qui remonte par la base on non. (si oui c'est qu'il y a une fugue collecteur base qui polarise le transistor et laisse passer le reste du courant du collecteur vers la base en remontant sur la resistance de base.
 
 
 ### Circuit avec LDR / relai et transistor
@@ -318,6 +320,16 @@ calcul de la polarisation du transistor qui va polariser le transistor de puissa
 Comme on est dans le cas de consommation maxi, on calcule une resistance faible du transistor de polarisation (mais mieux vaut ne pas le saturer car celà permettra d'être plus tolerant s'il y a consommation légèrement supérieure). On peut prendre l'hypothèse qu'en courant maxi la resistance de collector sera 2/3 superieur ou égale à la resistance du transistor de polarisation. On regarde ensuite la chute tension qui passe par le transistor et sa resistance de collecteur, et on divise par le courant nécessaire à la base du tr de puissance. ==> on en déduit la ddp sur la resistance et donc sa valeur.
 
 
+# realimentation négative
+
+circuit de régulation des alimentations stabilisées.
+
+2 resistances reliées à un transistor npn par sa base, son emissor est connecté à la terre atravers de 2 diodes. La tension de seuil des 2 diodes + la jonction du transistor = 3x0,6v = 1,8v
+a partir de 1,8v le transistor est polarisé. La tension sur la resistance du dessus => U => 1,8 pour une R de 10k  ==> Combien pour une R de 100K? ==> 10x1,8 ==> 18v
+
+
+
+
 # notes transistors
 
 
@@ -334,5 +346,43 @@ Cas d'un transistor qui n'est pas polarisé mais ou les tensions de collecteur e
 Attention si la tension de sortie est faible, et que même en remontant les transistor elle n'atteint pas la tension de seuil du zener, celui ci ne sera pas activé et il ne maintiendra pas la tension à sa tension de seuil.
 Lors d'un circuit d'alim stabilisé, veiller a regarder s'il n'y a pas un défaut de polarisation des transistors qui draine du courant et empêche la zener d'atteindre sa tension de seuil. Si tout parait normal c'est la zener qui est en fugue. 
 
+Si le transistor chauffe: il y a du courant qui passe => donc il ne peut pas sagir d'un problème de manque de gain, mais plutot d'une fugue collector emissor.
+
+Falta de ganho: malgré une bonne polarisation le transistor ne sature pas, ou a une résistance supérieure à ce qu'il devrait avoir. Mais : IL NE CHAUFFE PAS
+
+Si il y a une fugue sur un condensateur, le condo en parallèle avec la charge fait baisser la tension et fait passer beaucoup de courant à travers le transistor qui s'échauffe fortement.
+
+Chaleur ==> fort courant != problème de gain
+
+Si c'est chaud: fort courant. Si la tension de base est correcte, transistor bien polarisé. Si la tension de sortie n'arrive pas à monter ==> resistance de charge trop basse ou fuite d'un capaciteur qui réduit la résistance equivalente de la charge
 
 
+# réalimentation négative:
+
+le principe est de stabiliser la tension de sortie d'une alimentation: On identifie une tension maximum autorisée en sortie.
+Au niveau de la sortie on a un diviseur de tension connecté à la base d'un transistor NPN lui même relié par son émisseur à une diode zener.
+Celà permet de polariser le transistor quand la différence de potentiel entre la tension au diviseur et celle de la zener est supérieure à 0,6v.
+Dans ce cas, le NPN est polarisé et dévie le courant de la base du transistor principal de l'alimentation. En déviant le courant de la base du transistor principal, celà 
+réduit la polarisation de celui-ci, qui conduit moins, et augmente sa résistance propre. Celà réduit donc la tension de sortie de l'alimentation jusqu'à ce que le diviseur 
+de tension soit inférieur ou égal à 0,6v et que cette dépolarisation cesse.
+Note: on alimente directement par une diode relié au + la diode zener pour s'arrurer de la stabilité de sa polarisation. (resistance relativement élevée pour ne pas consommer trop de courant)
+
+Realimentation négative: se oppose à la variation. Va dans le sens inverse pour stabiliser.
+
+## Detection de tension:
+- la detection de courant se fait grâce à un diviseur de tension qui prend un échantillonage de la tension de sortie et la compare à une tension fixée par une diode zener (ou plusieurs diodes en série). Cette comparaison se fait entre la base et l'emisseur d'un transistor. l'emisseur à une tension fixée par la zener et le diviseur est relié à la base, plus la dif de tension est importante plus le courant sera important et plus le transistor sera polarisé. (comme la tension est fixée à 0,6v par la jonction du transistor.)
+
+## Détection de courant:
+Elle se fait en insérant une résistance de faible valeur entre base et emisseur d'un transistor qui servira à dévier le courant du circuit principal lorsque le courant dépasse une certaine valeur. En principe le transistor n'est pas polarisé mais lorsque le courant est suffisament important pour générer une chute de tension supérieure à 0,6v aux bornes de la résistance, celle ci polarise le transistor qui déviera le courant de la base du transistor principal, augmentant la résistance de celui ci et limitant le courant qui passe par la maille principale.
+
+Plus grande chute de tension =  plus grand courant circulant = plus grande valeur de resistance:
+
+# condensateur ceramique: fugue tres probable vs condo polyester fugue plus rare
+
+
+# Note: 
+quand deux résistances sont en série mais et entre les deux la base d'un PNP, il y aura un peu du courant de base qui passera par la résistance du bas.
+Plus il y a de courant qui passe dans une résistance, plus sa DDP (tension entre les bornes augmente) U = R(fixe) x i (un peu plus de courant que celui du diviseur resistif car on ajouter celui de la base)
+
+pour déterminer la polarisation d'un transistor en config d'ampli: on cherche sa tension de base (diviseur de tension + un peu de courant de base dans la R du bas)
+on en déduis la tension à l'émisseur, puis on en déduit la DDP sur chaque résistance, et donc celle du transistor.
